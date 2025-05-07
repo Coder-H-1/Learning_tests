@@ -1,0 +1,5 @@
+alias cls="clear"
+alias run="cargo run"
+alias build="cargo build"
+
+alias Update_system="sudo apt update && sudo apt upgrade"
