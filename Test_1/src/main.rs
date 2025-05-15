@@ -1,36 +1,33 @@
-use std::io;
+// A Guessing Game
 use rand::Rng;
+use std::io;
 use std::cmp::Ordering;
 
 fn main(){
-    // Creating a random Integer value
-    let secret_number = rand::thread_rng().gen_range(1..=100);
+    // Secret number
+    let secret_number: u32 = rand::thread_rng().gen_range(1..=100);
     
     loop{
-        // Creating a variable to store user input
+        println!("Enter a number :");
+        // Taking an natural number from user
         let mut guess = String::new();
+        io::stdin().read_line(&mut guess).expect("Error in User Input");
 
-        // Asking for a number from user
-        println!("Please guess a number : ");
-        io::stdin().read_line(&mut guess).expect("Error in reading user input");
-
-        // Changing String value to Integer for comparision
+        // converting User inputted string into unsigned 32-bit integer
         let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,    
-            Err(_) => continue,
+            Ok(num) => num,
+            Err(_) => continue
         };
-        // let guess: u32 = guess.trim().parse().expect("\n\n\t\tPlease enter a valid integer number.\t\t\n\n");
 
-
-        // Comparing values
         match guess.cmp(&secret_number){
-            Ordering::Less => println!("Low!"),
-            Ordering::Greater => println!("High!"),
+            Ordering::Less => println!("\t\t\tLOW!"),
+            Ordering::Greater => println!("\t\t\tHigh!"),
             Ordering::Equal => {
-                println!("You Win!");
+                println!("\t\t\tYou Win!");
                 break;
             }
-        }
-    }
 
+        };
+    }
+    
 }
